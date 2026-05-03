@@ -3,13 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import styles from './Auth.module.css';
 function Login(){
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";   
+    console.log("API_URL:", API_URL);
     const navigate = useNavigate();
     const { register, handleSubmit, formState:{errors}, reset} = useForm();
     const submitCall = async (data) => {
         console.log(data);
         try{
-            const response = await axios.post("http://localhost:5000/api/auth/login",data,{
-                withCredentials:true
+            const response = await axios.post(`${API_URL}/api/auth/login`,data,{
+                withCredentials:true,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             });
             if(response.status == 200){
                 alert("Login Successfull!");
