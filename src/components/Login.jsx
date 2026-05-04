@@ -23,7 +23,7 @@ function Login(){
             reset();
         }
         catch(error){
-            console.log(error);
+            console.log("ERROR:", error.response?.data || error.message);
         }
     };
 
